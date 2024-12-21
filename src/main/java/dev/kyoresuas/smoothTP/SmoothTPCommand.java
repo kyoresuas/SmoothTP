@@ -51,9 +51,16 @@ public class SmoothTPCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "Последовательность '" + sequenceName + "' не найдена.");
                     return true;
                 }
-                new TeleportTask(plugin, player, sequence).runTaskTimer(plugin, 0L, 2L); // Увеличили период для плавности
-                player.sendMessage(ChatColor.GREEN + "Начата телепортация по последовательности '" + sequenceName + "'.");
-                plugin.getLogger().info("[SmoothTP] Игрок " + player.getName() + " начал телепортацию по последовательности '" + sequenceName + "'.");
+
+                Location firstPoint = sequence.get(0);
+                player.teleport(firstPoint);
+
+                if (sequence.size() > 1) {
+                    List<Location> remainingPoints = sequence.subList(1, sequence.size());
+                    new TeleportTask(plugin, player, remainingPoints).runTaskTimer(plugin, 0L, 1L);
+                } else {
+                    player.sendMessage(ChatColor.YELLOW + "Последовательность содержит только одну точку.");
+                }
                 break;
 
             case "reload":
