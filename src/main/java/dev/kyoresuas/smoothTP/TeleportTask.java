@@ -112,3 +112,6 @@ public class TeleportTask extends BukkitRunnable {
         return start.clone().add(px * offset, 0, pz * offset);
     }
 }
+
+
+// TODO: Исправить кубическую интерполяцию, переход к точкам. Пофиксить возврат прежднего режима игры
