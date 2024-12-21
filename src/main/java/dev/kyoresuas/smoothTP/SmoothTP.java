@@ -2,6 +2,7 @@ package dev.kyoresuas.smoothTP;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,7 +18,9 @@ public final class SmoothTP extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         loadConfigSettings();
-        loadTeleportSequences();
+
+        Bukkit.getScheduler().runTaskLater(this, this::loadTeleportSequences, 5L); // Задержка 5 тиков (0.25 секунды)
+
         getLogger().info("[SmoothTP] Плагин успешно загружен!");
 
         if (getCommand("SmoothTP") != null) {
@@ -53,8 +56,9 @@ public final class SmoothTP extends JavaPlugin {
                         float yaw = (float) getConfig().getDouble(path + ".yaw", 0.0);
                         float pitch = (float) getConfig().getDouble(path + ".pitch", 0.0);
                         if (worldName != null) {
-                            if (Bukkit.getWorld(worldName) != null) {
-                                Location loc = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
+                            World world = Bukkit.getWorld(worldName);
+                            if (world != null) {
+                                Location loc = new Location(world, x, y, z, yaw, pitch);
                                 points.add(loc);
                             }
                         }
