@@ -1,0 +1,7 @@
+name: SmoothTP
+version: '1.0-SNAPSHOT'
+main: dev.kyoresuas.smoothTP.SmoothTP
+api-version: '1.21'
+load: STARTUP
+authors: [ Kyoresuas ]
+description: Плавная телепортация игроков между заданными точками
