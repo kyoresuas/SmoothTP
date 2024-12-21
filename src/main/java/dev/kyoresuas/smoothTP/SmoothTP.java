@@ -15,6 +15,7 @@ public final class SmoothTP extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        reloadConfig();
         loadConfigSettings();
         loadTeleportSequences();
         getLogger().info("[SmoothTP] Плагин успешно загружен!");
