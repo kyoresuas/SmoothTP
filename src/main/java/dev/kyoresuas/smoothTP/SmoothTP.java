@@ -17,7 +17,7 @@ public final class SmoothTP extends JavaPlugin {
         saveDefaultConfig();
         loadConfigSettings();
         loadTeleportSequences();
-        getLogger().info("[SmoothTP] Плагин включен!");
+        getLogger().info("[SmoothTP] Плагин успешно загружен!");
 
         if (getCommand("SmoothTP") != null) {
             getCommand("SmoothTP").setExecutor(new SmoothTPCommand(this));
@@ -28,12 +28,11 @@ public final class SmoothTP extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("[SmoothTP] Плагин выключен.");
+        getLogger().info("[SmoothTP] Плагин отключен.");
     }
 
     public void loadConfigSettings() {
         teleportSpeed = getConfig().getDouble("teleportSettings.speed", 0.5);
-        getLogger().info("[SmoothTP] Скорость телепортации: " + teleportSpeed);
     }
 
     public void loadTeleportSequences() {
@@ -56,26 +55,14 @@ public final class SmoothTP extends JavaPlugin {
                             if (Bukkit.getWorld(worldName) != null) {
                                 Location loc = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
                                 points.add(loc);
-                                getLogger().info("[SmoothTP] Добавлена точка '" + pointKey + "' в последовательность '" + sequenceName + "'.");
-                            } else {
-                                getLogger().warning("[SmoothTP] Мир '" + worldName + "' не найден для точки '" + pointKey + "' в последовательности '" + sequenceName + "'.");
                             }
-                        } else {
-                            getLogger().warning("[SmoothTP] Не указан мир для точки '" + pointKey + "' в последовательности '" + sequenceName + "'.");
                         }
                     }
                     if (!points.isEmpty()) {
                         teleportSequences.put(sequenceName.toLowerCase(), points);
-                        getLogger().info("[SmoothTP] Загружена последовательность '" + sequenceName + "' с " + points.size() + " точками.");
-                    } else {
-                        getLogger().warning("[SmoothTP] Последовательность '" + sequenceName + "' не содержит ни одной точки.");
                     }
-                } else {
-                    getLogger().warning("[SmoothTP] В последовательности '" + sequenceName + "' отсутствует раздел 'points'.");
                 }
             }
-        } else {
-            getLogger().warning("[SmoothTP] В конфигурации нет раздела 'teleportSequences'.");
         }
     }
 
