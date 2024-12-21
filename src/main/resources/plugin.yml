@@ -5,3 +5,10 @@ api-version: '1.21'
 load: STARTUP
 authors: [ Kyoresuas ]
 description: Плавная телепортация игроков между заданными точками
+
+commands:
+  SmoothTP:
+    description: Команды для плавной телепортации.
+    usage: /SmoothTP <start|reload> [название]
+    aliases: [stp]
+    permission: smoothtp.use
